@@ -2,8 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\config",
-    "\\routes"
+    "\\migrations",
+    "\\models",
+    "\\routes",
+    "\\seeders",
+    "\\views"
   ],
-  "SelectedNode": "\\passport",
+  "SelectedNode": "\\views\\main.html",
   "PreviewInSolutionExplorer": false
 }

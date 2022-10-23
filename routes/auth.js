@@ -53,7 +53,6 @@ router.get('/logout', isLoggedIn, (req, res) => {
         req.session.destroy();
         res.redirect('/');
     });
-
 });
 
 router.get('/kakao', passport.authenticate('kakao'));

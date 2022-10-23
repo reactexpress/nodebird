@@ -19,7 +19,7 @@
             </div>
         </form>
     </div>
-    {% endif %}
+
     <div class="twits">
         <form id="hashtag-form" action="/hashtag">
             <input type="text" name="hashtag" placeholder="태그 검색">
@@ -33,6 +33,11 @@
             {% if not followerIdList.includes(twit.User.id) and twit.User.id !== user.id %}
             <button class="twit-follow">팔로우하기</button>
             {% endif %}
+  <!-- 팔라우 취소 작성-->       {% if followerIdList %}
+            <button class="twit-unfollow">팔로우 취소</button>    
+            {% endif %}
+
+
             <div class="twit-content">{{twit.content}}</div>
             {% if twit.img %}
             <div class="twit-img"><img src="{{twit.img}}" alt="섬네일"></div>
@@ -40,6 +45,7 @@
         </div>
         {% endfor %}
     </div>
+    {% endif %}
 </div>
 {% endblock %}
 
@@ -80,5 +86,34 @@
         }
       });
     });
+// 팔로우 취소 작성 //
+
+    document.querySelectorAll('.twit-unfollow').forEach(function (tag) {
+        tag.addEventListener('click', function () {
+            const myId = document.querySelector('#my-id');
+            if (myId) {
+                const userId = tag.parentNode.querySelector('.twit-user-id').value;
+                if (userId !== myId.value) {
+                    if (confirm('팔로잉취소하시겠습니까?')) {
+                        axios.post(`/user/${userId}/unfollow`)
+                            .then(() => {
+                                location.reload();
+                            })
+                            .catch((err) => {
+                                console.error(err);
+                            });
+                    }
+                }
+            }
+        });
+    });
+
+
+
+
+
+
+
+
 </script>
 {% endblock %}
